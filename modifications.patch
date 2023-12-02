@@ -1,0 +1,53 @@
+diff --git a/pom.xml b/pom.xml
+index 5535ae0..2d5932f 100755
+--- a/pom.xml
++++ b/pom.xml
+@@ -3,7 +3,7 @@
+   <parent>
+     <groupId>org.jenkins-ci.plugins</groupId>
+     <artifactId>plugin</artifactId>
+-    <version>3.57</version>
++    <version>4.51</version>
+     <relativePath />
+   </parent>
+ 
+@@ -30,9 +30,19 @@
+   </scm>
+ 
+   <properties>
+-    <jenkins.version>2.176.4</jenkins.version>
+-    <java.level>8</java.level>
++    <jenkins.version>2.346.3</jenkins.version>
+   </properties>
++  <dependencyManagement>
++    <dependencies>
++      <dependency>
++        <groupId>io.jenkins.tools.bom</groupId>
++        <artifactId>bom-2.176.x</artifactId>
++        <version>16</version>
++        <type>pom</type>
++        <scope>import</scope>
++      </dependency>
++    </dependencies>
++  </dependencyManagement>
+ 
+   <build>
+     <plugins>
+@@ -141,17 +151,14 @@
+     <dependency>
+       <groupId>org.jenkins-ci.plugins</groupId>
+       <artifactId>scm-api</artifactId>
+-      <version>2.4.1</version>
+     </dependency>
+     <dependency>
+       <groupId>org.jenkins-ci.plugins.workflow</groupId>
+       <artifactId>workflow-scm-step</artifactId>
+-      <version>2.9</version>
+     </dependency>
+     <dependency>
+       <groupId>org.jenkins-ci.plugins</groupId>
+       <artifactId>credentials</artifactId>
+-      <version>2.1.19</version>
+     </dependency>
+     <dependency>
+       <groupId>org.apache.commons</groupId>
