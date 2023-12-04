@@ -4,8 +4,8 @@ import com.codicesoftware.plugins.hudson.PlasticTool;
 import com.codicesoftware.plugins.hudson.commands.CommandRunner;
 import com.codicesoftware.plugins.hudson.commands.GetFileCommand;
 import com.codicesoftware.plugins.hudson.util.DeleteOnCloseFileInputStream;
+import edu.umd.cs.findbugs.annotations.NonNull;
 
-import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.nio.file.Path;
 
@@ -13,11 +13,11 @@ public class FileContent {
     private FileContent() {
     }
 
-    @Nonnull
+    @NonNull
     public static DeleteOnCloseFileInputStream getFromServer(
-            @Nonnull final PlasticTool tool,
-            @Nonnull final String serverFile,
-            @Nonnull final String repObjectSpec) throws IOException, InterruptedException {
+            @NonNull final PlasticTool tool,
+            @NonNull final String serverFile,
+            @NonNull final String repObjectSpec) throws IOException, InterruptedException {
         Path tempFile = TempFile.create();
 
         String serverPathRevSpec = String.format("serverpath:%s#%s", serverFile, repObjectSpec);

@@ -40,9 +40,8 @@ import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.export.Exported;
 import org.kohsuke.stapler.interceptor.RequirePOST;
 
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import edu.umd.cs.findbugs.annotations.CheckForNull;
+import edu.umd.cs.findbugs.annotations.Nullable;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -62,10 +61,10 @@ public class MergebotScm extends SCM {
 
     @DataBoundConstructor
     public MergebotScm(
-            @Nonnull final CleanupMethod cleanup,
-            @Nonnull final WorkingMode workingMode,
-            @Nonnull final String credentialsId,
-            @Nonnull final String specAttributeName) {
+            @NonNull final CleanupMethod cleanup,
+            @NonNull final WorkingMode workingMode,
+            @NonNull final String credentialsId,
+            @NonNull final String specAttributeName) {
         this.cleanup = cleanup;
         this.workingMode = workingMode;
         this.credentialsId = credentialsId;
@@ -125,10 +124,10 @@ public class MergebotScm extends SCM {
 
     @Override
     public void checkout(
-            @Nonnull final Run<?, ?> run,
-            @Nonnull final Launcher launcher,
-            @Nonnull final FilePath workspace,
-            @Nonnull final TaskListener listener,
+            @NonNull final Run<?, ?> run,
+            @NonNull final Launcher launcher,
+            @NonNull final FilePath workspace,
+            @NonNull final TaskListener listener,
             @CheckForNull final File changelogFile,
             @CheckForNull final SCMRevisionState baseline) throws IOException, InterruptedException {
 
@@ -170,25 +169,25 @@ public class MergebotScm extends SCM {
 
     @Override
     public SCMRevisionState calcRevisionsFromBuild(
-            @Nonnull final Run<?, ?> run,
+            @NonNull final Run<?, ?> run,
             @Nullable final FilePath wkPath,
             @Nullable final Launcher launcher,
-            @Nonnull final TaskListener listener) throws IOException, InterruptedException {
+            @NonNull final TaskListener listener) throws IOException, InterruptedException {
         return SCMRevisionState.NONE;
     }
 
-    @Nonnull
+    @NonNull
     public ClientConfigurationArguments buildClientConfigurationArguments(
-            @Nonnull final Run<?, ?> run,
-            @Nonnull final String repServer) {
+            @NonNull final Run<?, ?> run,
+            @NonNull final String repServer) {
         return new ClientConfigurationArguments(
                 workingMode, CredentialsFinder.getFromId(credentialsId, run.getParent()), repServer);
     }
 
     private void writeChangeLog(
-            @Nonnull final TaskListener listener,
-            @Nonnull final File changelogFile,
-            @Nonnull final ChangeSet buildObject) throws AbortException {
+            @NonNull final TaskListener listener,
+            @NonNull final File changelogFile,
+            @NonNull final ChangeSet buildObject) throws AbortException {
         try {
             ChangeSetWriter.write(new ArrayList<ChangeSet>() {{ add(buildObject); }}, changelogFile);
         } catch (Exception e) {

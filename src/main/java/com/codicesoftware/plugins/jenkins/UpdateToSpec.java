@@ -1,10 +1,10 @@
 package com.codicesoftware.plugins.jenkins;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.AbortException;
 import hudson.Util;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import edu.umd.cs.findbugs.annotations.Nullable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,28 +14,28 @@ public class UpdateToSpec {
         "^((lb|cs|sh|br):|)([^@]+)@(rep:)?([^@]+)@(repserver:)?(.+)$");
 
     private final ObjectSpecType specObjectType;
-    @Nonnull
+    @NonNull
     private final String objectName;
-    @Nonnull
+    @NonNull
     private final String repName;
-    @Nonnull
+    @NonNull
     private final String repServer;
 
     public String getFullObjectSpec() {
         return String.format("%s:%s@%s@%s", specObjectType.toSpecObject(), objectName, repName, repServer);
     }
 
-    @Nonnull
+    @NonNull
     public String getObjectName() {
         return objectName;
     }
 
-    @Nonnull
+    @NonNull
     public String getRepName() {
         return repName;
     }
 
-    @Nonnull
+    @NonNull
     public String getRepServer() {
         return repServer;
     }
@@ -60,10 +60,10 @@ public class UpdateToSpec {
     }
 
     private UpdateToSpec(
-            @Nonnull final ObjectSpecType specObjectType,
-            @Nonnull final String objectName,
-            @Nonnull final String repName,
-            @Nonnull final String repServer) {
+            @NonNull final ObjectSpecType specObjectType,
+            @NonNull final String objectName,
+            @NonNull final String repName,
+            @NonNull final String repServer) {
         this.specObjectType = specObjectType;
         this.objectName = objectName;
         this.repName = repName;

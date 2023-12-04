@@ -1,10 +1,10 @@
 package com.codicesoftware.plugins.hudson.commands.parsers;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.FilePath;
 import hudson.model.Computer;
 
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
+import edu.umd.cs.findbugs.annotations.CheckForNull;
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,7 +15,7 @@ class SafeFilePath {
     private SafeFilePath() {
     }
 
-    static boolean exists(@Nonnull final FilePath filePath) {
+    static boolean exists(@NonNull final FilePath filePath) {
         try {
             return filePath.exists();
         } catch (Exception e) {
@@ -28,7 +28,7 @@ class SafeFilePath {
     }
 
     @CheckForNull
-    static InputStream read(@Nonnull final FilePath filePath) {
+    static InputStream read(@NonNull final FilePath filePath) {
         try {
             return filePath.read();
         } catch (Exception e) {
@@ -40,8 +40,8 @@ class SafeFilePath {
         }
     }
 
-    @Nonnull
-    private static String getPrintableFilePath(@Nonnull final FilePath path) {
+    @NonNull
+    private static String getPrintableFilePath(@NonNull final FilePath path) {
         Computer computer = path.toComputer();
         return String.format(
             "'%s' in '%s'",

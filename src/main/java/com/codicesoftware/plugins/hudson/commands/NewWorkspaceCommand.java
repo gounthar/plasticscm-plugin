@@ -1,22 +1,21 @@
 package com.codicesoftware.plugins.hudson.commands;
 
 import com.codicesoftware.plugins.hudson.util.MaskedArgumentListBuilder;
+import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.FilePath;
 
-import javax.annotation.Nonnull;
-
 public class NewWorkspaceCommand implements Command {
-    @Nonnull
+    @NonNull
     private final String workspaceName;
-    @Nonnull
+    @NonNull
     private final FilePath workspacePath;
 
-    public NewWorkspaceCommand(@Nonnull final String workspaceName, @Nonnull final FilePath workspacePath) {
+    public NewWorkspaceCommand(@NonNull final String workspaceName, @NonNull final FilePath workspacePath) {
         this.workspaceName = workspaceName;
         this.workspacePath = workspacePath;
     }
 
-    @Nonnull
+    @NonNull
     public MaskedArgumentListBuilder getArguments() {
         MaskedArgumentListBuilder arguments = new MaskedArgumentListBuilder();
 

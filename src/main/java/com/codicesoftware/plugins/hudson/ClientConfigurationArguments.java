@@ -2,12 +2,12 @@ package com.codicesoftware.plugins.hudson;
 
 import com.cloudbees.plugins.credentials.common.StandardUsernamePasswordCredentials;
 import com.codicesoftware.plugins.hudson.model.WorkingMode;
+import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.Util;
 import hudson.util.ArgumentListBuilder;
 import hudson.util.Secret;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import edu.umd.cs.findbugs.annotations.Nullable;
 
 public class ClientConfigurationArguments {
     @Nullable
@@ -26,8 +26,8 @@ public class ClientConfigurationArguments {
         this.server = Util.fixEmpty(server);
     }
 
-    @Nonnull
-    public ArgumentListBuilder fillParameters(@Nonnull ArgumentListBuilder args) {
+    @NonNull
+    public ArgumentListBuilder fillParameters(@NonNull ArgumentListBuilder args) {
         if (hasServerValue()) {
             args.add(getServerParam());
         }
@@ -40,22 +40,22 @@ public class ClientConfigurationArguments {
         return args;
     }
 
-    @Nonnull
+    @NonNull
     String getServerParam() {
         return "--server=" + server;
     }
 
-    @Nonnull
+    @NonNull
     String getWorkingModeParam() {
         return "--workingmode=" + workingMode.getPlasticWorkingMode();
     }
 
-    @Nonnull
+    @NonNull
     String getUserParam() {
         return "--username=" + credentials.getUsername();
     }
 
-    @Nonnull
+    @NonNull
     String getPasswordParam() {
         return "--password=" + Secret.toString(credentials.getPassword());
     }

@@ -3,11 +3,11 @@ package com.codicesoftware.plugins.hudson.commands.parsers;
 import com.codicesoftware.plugins.DigesterUtils;
 import com.codicesoftware.plugins.hudson.model.ChangeSet;
 import com.codicesoftware.plugins.jenkins.ObjectSpecType;
+import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.FilePath;
 import org.apache.commons.digester3.Digester;
 import org.xml.sax.SAXException;
 
-import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
@@ -21,10 +21,10 @@ public class FindOutputParser {
     // Utility classes shouldn't have default constructors
     private FindOutputParser() { }
 
-    @Nonnull
+    @NonNull
     public static List<ChangeSet> parseReader(
-            @Nonnull final ObjectSpecType specType,
-            @Nonnull final FilePath path) throws IOException, ParseException {
+            @NonNull final ObjectSpecType specType,
+            @NonNull final FilePath path) throws IOException, ParseException {
         if (specType != ObjectSpecType.Changeset && specType != ObjectSpecType.Shelve) {
             throw new ParseException("Invalid object type provided", 0);
         }

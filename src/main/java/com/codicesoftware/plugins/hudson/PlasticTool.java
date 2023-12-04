@@ -1,6 +1,7 @@
 package com.codicesoftware.plugins.hudson;
 
 import com.codicesoftware.plugins.jenkins.tools.CmTool;
+import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.AbortException;
 import hudson.FilePath;
 import hudson.Launcher;
@@ -9,9 +10,8 @@ import hudson.model.TaskListener;
 import hudson.util.ArgumentListBuilder;
 import hudson.util.ForkOutputStream;
 
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import edu.umd.cs.findbugs.annotations.CheckForNull;
+import edu.umd.cs.findbugs.annotations.Nullable;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -34,21 +34,21 @@ public class PlasticTool {
 
     @CheckForNull
     private final CmTool tool;
-    @Nonnull
+    @NonNull
     private final Launcher launcher;
-    @Nonnull
+    @NonNull
     private final TaskListener listener;
     @CheckForNull
     private final FilePath workspace;
-    @Nonnull
+    @NonNull
     private final ClientConfigurationArguments clientConfigurationArguments;
 
     public PlasticTool(
         @CheckForNull CmTool tool,
-        @Nonnull Launcher launcher,
-        @Nonnull TaskListener listener,
+        @NonNull Launcher launcher,
+        @NonNull TaskListener listener,
         @CheckForNull FilePath workspace,
-        @Nonnull ClientConfigurationArguments clientConfigurationArguments) {
+        @NonNull ClientConfigurationArguments clientConfigurationArguments) {
         this.tool = tool;
         this.launcher = launcher;
         this.listener = listener;
@@ -64,14 +64,14 @@ public class PlasticTool {
      * @throws IOException Operation error
      * @throws InterruptedException Process has been interrupted
      */
-    @Nonnull
-    public Reader execute(@Nonnull String[] arguments) throws IOException, InterruptedException {
+    @NonNull
+    public Reader execute(@NonNull String[] arguments) throws IOException, InterruptedException {
         return execute(arguments, null, true);
     }
 
-    @Nonnull
+    @NonNull
     public Reader execute(
-            @Nonnull String[] arguments,
+            @NonNull String[] arguments,
             @CheckForNull FilePath executionPath,
             boolean printOutput) throws IOException, InterruptedException {
         if (tool == null) {
@@ -101,10 +101,10 @@ public class PlasticTool {
         throw new AbortException(errorMessage);
     }
 
-    @Nonnull
+    @NonNull
     private ArgumentListBuilder getToolArguments(
-            @Nonnull String[] cmArgs,
-            @Nonnull ClientConfigurationArguments clientConfigurationArguments) {
+            @NonNull String[] cmArgs,
+            @NonNull ClientConfigurationArguments clientConfigurationArguments) {
         if (tool == null) {
             return new ArgumentListBuilder();
         }

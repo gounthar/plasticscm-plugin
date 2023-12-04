@@ -1,12 +1,13 @@
 package com.codicesoftware.plugins.hudson.model;
 
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import edu.umd.cs.findbugs.annotations.NonNull;
+
+import edu.umd.cs.findbugs.annotations.CheckForNull;
+import edu.umd.cs.findbugs.annotations.Nullable;
 
 public class WorkspaceInfo {
 
-    @Nonnull
+    @NonNull
     private final String repoName;
     @CheckForNull
     private final String branch;
@@ -16,7 +17,7 @@ public class WorkspaceInfo {
     private final String changeset;
 
     public WorkspaceInfo(
-            @Nonnull String repoName,
+            @NonNull String repoName,
             @Nullable String branch,
             @Nullable String label,
             @Nullable String changeset) {
@@ -26,7 +27,7 @@ public class WorkspaceInfo {
         this.changeset = changeset;
     }
 
-    @Nonnull
+    @NonNull
     public String getRepoName() {
         return repoName;
     }
@@ -46,7 +47,7 @@ public class WorkspaceInfo {
         return changeset;
     }
 
-    @Nonnull
+    @NonNull
     public String getRepObjectSpec() {
         return String.format("%s@%s", getObjectSpec(), repoName);
     }

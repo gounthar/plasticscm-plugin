@@ -8,6 +8,7 @@ import com.codicesoftware.plugins.hudson.model.WorkspaceInfo;
 import com.codicesoftware.plugins.hudson.util.SelectorParametersResolver;
 import com.codicesoftware.plugins.hudson.util.StringUtil;
 import com.codicesoftware.plugins.jenkins.tools.CmTool;
+import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.AbortException;
 import hudson.EnvVars;
 import hudson.Launcher;
@@ -18,8 +19,7 @@ import hudson.model.TaskListener;
 import jenkins.model.Jenkins;
 import jenkins.scm.api.SCMFile;
 
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
+import edu.umd.cs.findbugs.annotations.CheckForNull;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -36,19 +36,19 @@ public class PlasticSCMFile extends SCMFile {
 
     private static final Logger LOGGER = Logger.getLogger(PlasticSCMFile.class.getName());
 
-    @Nonnull
+    @NonNull
     private final PlasticSCMFileSystem fs;
     private final boolean isDir;
 
-    public PlasticSCMFile(@Nonnull final PlasticSCMFileSystem fs) {
+    public PlasticSCMFile(@NonNull final PlasticSCMFileSystem fs) {
         this.fs = fs;
         this.isDir = true;
     }
 
     public PlasticSCMFile(
-            @Nonnull final PlasticSCMFileSystem fs,
-            @Nonnull final PlasticSCMFile parent,
-            @Nonnull final String name,
+            @NonNull final PlasticSCMFileSystem fs,
+            @NonNull final PlasticSCMFile parent,
+            @NonNull final String name,
             final boolean isDir) {
         super(parent, name);
         this.fs = fs;
@@ -56,7 +56,7 @@ public class PlasticSCMFile extends SCMFile {
     }
 
     @CheckForNull
-    private static List<ParameterValue> getLastBuildParameters(@Nonnull final PlasticSCMFileSystem fs) {
+    private static List<ParameterValue> getLastBuildParameters(@NonNull final PlasticSCMFileSystem fs) {
         Run<?, ?> run = LastBuild.get(fs.getOwner());
         if (run == null) {
             return null;
@@ -66,10 +66,10 @@ public class PlasticSCMFile extends SCMFile {
         return parameters != null ? parameters.getParameters() : null;
     }
 
-    @Nonnull
+    @NonNull
     private static String getRepObjectSpecFromSelector(
-            @Nonnull final PlasticTool tool,
-            @Nonnull final String selectorText) throws IOException, InterruptedException {
+            @NonNull final PlasticTool tool,
+            @NonNull final String selectorText) throws IOException, InterruptedException {
         Path tempFile = null;
         BufferedWriter out = null;
         try {
@@ -101,7 +101,7 @@ public class PlasticSCMFile extends SCMFile {
         }
     }
 
-    private static String getWorkspaceNameFromScriptPath(@Nonnull final String scriptPath) {
+    private static String getWorkspaceNameFromScriptPath(@NonNull final String scriptPath) {
         int separatorIndex = scriptPath.indexOf(StringUtil.SEPARATOR);
 
         if (separatorIndex == -1) {
@@ -111,7 +111,7 @@ public class PlasticSCMFile extends SCMFile {
         return scriptPath.substring(0, separatorIndex).trim();
     }
 
-    private static String getServerFileFromScriptPath(@Nonnull final String scriptPath) {
+    private static String getServerFileFromScriptPath(@NonNull final String scriptPath) {
         int separatorIndex = scriptPath.indexOf(StringUtil.SEPARATOR);
 
         if (separatorIndex == -1) {
@@ -122,19 +122,19 @@ public class PlasticSCMFile extends SCMFile {
     }
 
     private static WorkspaceInfo getSelectorSpec(
-            @Nonnull final PlasticTool tool,
-            @Nonnull final String filePath) throws IOException, ParseException, InterruptedException {
+            @NonNull final PlasticTool tool,
+            @NonNull final String filePath) throws IOException, ParseException, InterruptedException {
         GetSelectorSpecCommand command = new GetSelectorSpecCommand(filePath);
         return CommandRunner.executeAndRead(tool, command);
     }
 
-    @Nonnull
+    @NonNull
     @Override
-    protected SCMFile newChild(@Nonnull final String name, final boolean assumeIsDirectory) {
+    protected SCMFile newChild(@NonNull final String name, final boolean assumeIsDirectory) {
         return new PlasticSCMFile(fs, this, name, assumeIsDirectory);
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public Iterable<SCMFile> children() {
         return new ArrayList<SCMFile>();
@@ -145,13 +145,13 @@ public class PlasticSCMFile extends SCMFile {
         return 0;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     protected Type type() {
         return isDir ? Type.DIRECTORY : Type.REGULAR_FILE;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public InputStream content() throws IOException, InterruptedException {
         PlasticSCM.WorkspaceInfo workspaceInfo = fs.getSCM().getFirstWorkspace();

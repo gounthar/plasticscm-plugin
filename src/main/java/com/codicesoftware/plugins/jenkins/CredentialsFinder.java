@@ -9,8 +9,8 @@ import hudson.model.Item;
 import hudson.model.Queue;
 import hudson.security.ACL;
 
-import javax.annotation.CheckForNull;
-import javax.annotation.Nullable;
+import edu.umd.cs.findbugs.annotations.CheckForNull;
+import edu.umd.cs.findbugs.annotations.Nullable;
 
 public class CredentialsFinder {
 

@@ -1,8 +1,7 @@
 package com.codicesoftware.plugins.hudson.util;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.Util;
-
-import javax.annotation.Nonnull;
 
 public class StringUtil {
 
@@ -22,7 +21,7 @@ public class StringUtil {
         return Util.fixNull(value).replaceAll("[\\n\\r\\t ]+", " ").trim();
     }
 
-    public static String ensureStartsWithSlash(@Nonnull final String scriptPath) {
+    public static String ensureStartsWithSlash(@NonNull final String scriptPath) {
         return scriptPath.startsWith(SEPARATOR) ? scriptPath : SEPARATOR + scriptPath;
     }
 }

@@ -14,11 +14,11 @@ import com.codicesoftware.plugins.hudson.model.Workspace;
 import com.codicesoftware.plugins.hudson.util.StringUtil;
 import com.codicesoftware.plugins.jenkins.AbortExceptionBuilder;
 import com.codicesoftware.plugins.jenkins.UpdateToSpec;
+import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.FilePath;
 import hudson.model.TaskListener;
 import hudson.remoting.VirtualChannel;
 
-import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -36,10 +36,10 @@ public class WorkspaceManager {
     private WorkspaceManager() { }
 
     public static Workspace prepare(
-            @Nonnull final PlasticTool tool,
-            @Nonnull final TaskListener listener,
-            @Nonnull final FilePath workspacePath,
-            @Nonnull final CleanupMethod cleanup) throws IOException, InterruptedException {
+            @NonNull final PlasticTool tool,
+            @NonNull final TaskListener listener,
+            @NonNull final FilePath workspacePath,
+            @NonNull final CleanupMethod cleanup) throws IOException, InterruptedException {
         try {
             if (!workspacePath.exists()) {
                 workspacePath.mkdirs();
@@ -109,9 +109,9 @@ public class WorkspaceManager {
     }
 
     public static void setSelector(
-            @Nonnull final PlasticTool tool,
-            @Nonnull final FilePath workspacePath,
-            @Nonnull final String selector) throws IOException, InterruptedException {
+            @NonNull final PlasticTool tool,
+            @NonNull final FilePath workspacePath,
+            @NonNull final String selector) throws IOException, InterruptedException {
         LOGGER.fine("Changing workspace selector to '" + StringUtil.singleLine(selector) + "'");
 
         FilePath selectorPath = workspacePath.createTextTempFile("selector", ".txt", selector);
@@ -121,9 +121,9 @@ public class WorkspaceManager {
     }
 
     public static void switchTo(
-            @Nonnull final PlasticTool tool,
-            @Nonnull final FilePath workspacePath,
-            @Nonnull final UpdateToSpec spec) throws IOException, InterruptedException {
+            @NonNull final PlasticTool tool,
+            @NonNull final FilePath workspacePath,
+            @NonNull final UpdateToSpec spec) throws IOException, InterruptedException {
         String targetWorkspacePath = workspacePath.getRemote();
         String targetSpec = spec.getFullObjectSpec();
 
@@ -212,7 +212,7 @@ public class WorkspaceManager {
         return result;
     }
 
-    protected static boolean isNestedWorkspacePath(@Nonnull final String basePath, @Nonnull final String nestedPath) {
+    protected static boolean isNestedWorkspacePath(@NonNull final String basePath, @NonNull final String nestedPath) {
         String fixedBasePath = basePath.replaceAll("\\\\", "/") + "/";
         String fixedNestedPath = nestedPath.replaceAll("\\\\", "/");
 

@@ -6,6 +6,7 @@ import com.codicesoftware.plugins.jenkins.FileContent;
 import com.codicesoftware.plugins.jenkins.LastBuild;
 import com.codicesoftware.plugins.jenkins.UpdateToSpec;
 import com.codicesoftware.plugins.jenkins.tools.CmTool;
+import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.AbortException;
 import hudson.EnvVars;
 import hudson.Launcher;
@@ -14,7 +15,6 @@ import hudson.model.TaskListener;
 import jenkins.model.Jenkins;
 import jenkins.scm.api.SCMFile;
 
-import javax.annotation.Nonnull;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,28 +25,28 @@ public class MergebotScmFile extends SCMFile {
     private final MergebotScmFileSystem fs;
     private final boolean isDir;
 
-    public MergebotScmFile(@Nonnull final MergebotScmFileSystem fs) {
+    public MergebotScmFile(@NonNull final MergebotScmFileSystem fs) {
         this.fs = fs;
         this.isDir = true;
     }
 
     public MergebotScmFile(
-            @Nonnull final MergebotScmFileSystem fs,
-            @Nonnull final MergebotScmFile parent,
-            @Nonnull final String name,
+            @NonNull final MergebotScmFileSystem fs,
+            @NonNull final MergebotScmFile parent,
+            @NonNull final String name,
             final boolean isDir) {
         super(parent, name);
         this.fs = fs;
         this.isDir = isDir;
     }
 
-    @Nonnull
+    @NonNull
     @Override
-    protected SCMFile newChild(@Nonnull String name, boolean assumeIsDirectory) {
+    protected SCMFile newChild(@NonNull String name, boolean assumeIsDirectory) {
         return new MergebotScmFile(fs, this, name, assumeIsDirectory);
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public Iterable<SCMFile> children() throws IOException, InterruptedException {
         return new ArrayList<SCMFile>();
@@ -57,13 +57,13 @@ public class MergebotScmFile extends SCMFile {
         return 0;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     protected Type type() throws IOException, InterruptedException {
         return isDir ? Type.DIRECTORY : Type.REGULAR_FILE;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public InputStream content() throws IOException, InterruptedException {
         Launcher launcher = fs.getLauncher();

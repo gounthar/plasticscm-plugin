@@ -9,11 +9,11 @@ import com.codicesoftware.plugins.hudson.commands.FindChangesetCommand;
 import com.codicesoftware.plugins.hudson.commands.ParseableCommand;
 import com.codicesoftware.plugins.hudson.model.ChangeSet;
 import com.codicesoftware.plugins.hudson.model.ObjectSpec;
+import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.AbortException;
 import hudson.FilePath;
 import hudson.model.TaskListener;
 
-import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
@@ -26,11 +26,11 @@ public class ChangesetDetails {
     private ChangesetDetails() {
     }
 
-    @Nonnull
+    @NonNull
     public static ChangeSet forWorkspace(
-            @Nonnull final PlasticTool tool,
-            @Nonnull final FilePath workspace,
-            @Nonnull final TaskListener listener) throws IOException, InterruptedException {
+            @NonNull final PlasticTool tool,
+            @NonNull final FilePath workspace,
+            @NonNull final TaskListener listener) throws IOException, InterruptedException {
 
         ObjectSpec csetId = CurrentWorkspace.findSpecId(tool, listener, workspace);
 
@@ -56,20 +56,20 @@ public class ChangesetDetails {
         }
     }
 
-    @Nonnull
+    @NonNull
     private static ChangeSet getChangeset(
-            @Nonnull final PlasticTool tool,
-            @Nonnull final ObjectSpec csetId,
-            @Nonnull final FilePath xmlOutputPath) throws IOException, InterruptedException, ParseException {
+            @NonNull final PlasticTool tool,
+            @NonNull final ObjectSpec csetId,
+            @NonNull final FilePath xmlOutputPath) throws IOException, InterruptedException, ParseException {
         ParseableCommand<ChangeSet> command = new ChangesetLogCommand(csetId, xmlOutputPath);
         return CommandRunner.executeAndRead(tool, command, false);
     }
 
-    @Nonnull
+    @NonNull
     private static ChangeSet getShelve(
-            @Nonnull final PlasticTool tool,
-            @Nonnull final ObjectSpec csetId,
-            @Nonnull final FilePath xmlOutputPath) throws IOException, InterruptedException, ParseException {
+            @NonNull final PlasticTool tool,
+            @NonNull final ObjectSpec csetId,
+            @NonNull final FilePath xmlOutputPath) throws IOException, InterruptedException, ParseException {
         ParseableCommand<ChangeSet> findChangeset = new FindChangesetCommand(csetId, xmlOutputPath);
         ChangeSet result = CommandRunner.executeAndRead(tool, findChangeset, false);
 

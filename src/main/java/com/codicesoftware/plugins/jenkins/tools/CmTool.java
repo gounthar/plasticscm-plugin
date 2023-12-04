@@ -1,5 +1,6 @@
 package com.codicesoftware.plugins.jenkins.tools;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import hudson.EnvVars;
 import hudson.Extension;
@@ -24,7 +25,6 @@ import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.export.Exported;
 import org.kohsuke.stapler.interceptor.RequirePOST;
 
-import javax.annotation.Nonnull;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
@@ -66,7 +66,7 @@ public class CmTool extends ToolInstallation implements NodeSpecific<CmTool>, En
     }
 
     @Override
-    public CmTool forNode(@Nonnull Node node, TaskListener log) throws IOException, InterruptedException {
+    public CmTool forNode(@NonNull Node node, TaskListener log) throws IOException, InterruptedException {
         Platform nodePlatform = Platform.of(node);
         return new CmTool(
             getName(),
@@ -183,7 +183,7 @@ public class CmTool extends ToolInstallation implements NodeSpecific<CmTool>, En
         }
 
         @Override
-        @Nonnull
+        @NonNull
         public String getDisplayName() {
             return "Plastic SCM";
         }

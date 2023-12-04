@@ -1,6 +1,7 @@
 package com.codicesoftware.plugins.hudson.util;
 
-import javax.annotation.Nonnull;
+import edu.umd.cs.findbugs.annotations.NonNull;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -12,10 +13,10 @@ public class DeleteOnCloseFileInputStream extends FileInputStream {
 
     private static final Logger LOGGER = Logger.getLogger(DeleteOnCloseFileInputStream.class.getName());
 
-    @Nonnull
+    @NonNull
     private final Path file;
 
-    public DeleteOnCloseFileInputStream(@Nonnull final Path file) throws FileNotFoundException {
+    public DeleteOnCloseFileInputStream(@NonNull final Path file) throws FileNotFoundException {
         super(file.toAbsolutePath().toFile());
         this.file = file.toAbsolutePath();
     }

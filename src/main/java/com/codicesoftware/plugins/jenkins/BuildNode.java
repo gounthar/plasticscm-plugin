@@ -1,19 +1,18 @@
 package com.codicesoftware.plugins.jenkins;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.FilePath;
 import hudson.model.Computer;
 import hudson.model.Node;
 import jenkins.model.Jenkins;
-
-import javax.annotation.Nonnull;
 
 public class BuildNode {
 
     private BuildNode() {
     }
 
-    @Nonnull
-    public static Node getFromWorkspacePath(@Nonnull final FilePath workspacePath) {
+    @NonNull
+    public static Node getFromWorkspacePath(@NonNull final FilePath workspacePath) {
         Jenkins jenkins = Jenkins.getInstance();
 
         if (!workspacePath.isRemote()) {

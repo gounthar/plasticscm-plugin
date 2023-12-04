@@ -5,6 +5,7 @@ import com.codicesoftware.plugins.hudson.model.WorkingMode;
 import com.codicesoftware.plugins.hudson.util.FormChecker;
 import com.codicesoftware.plugins.hudson.util.FormFiller;
 import com.codicesoftware.plugins.jenkins.SelectorTemplates;
+import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.Extension;
 import hudson.Util;
 import hudson.model.Item;
@@ -18,7 +19,6 @@ import org.kohsuke.stapler.DataBoundSetter;
 import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.interceptor.RequirePOST;
 
-import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -141,7 +141,7 @@ public class PlasticSCMStep extends SCMStep {
         this.directory = directory;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     protected SCM createSCM() {
         return new PlasticSCM(
@@ -170,7 +170,7 @@ public class PlasticSCMStep extends SCMStep {
         }
 
         @Override
-        @Nonnull
+        @NonNull
         public String getDisplayName() {
             return "Plastic SCM";
         }

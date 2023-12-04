@@ -1,6 +1,7 @@
 package com.codicesoftware.plugins.jenkins.mergebot;
 
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.Extension;
 import hudson.Launcher;
 import hudson.model.Item;
@@ -13,8 +14,7 @@ import jenkins.scm.api.SCMRevision;
 import jenkins.scm.api.SCMSource;
 import jenkins.scm.api.SCMSourceDescriptor;
 
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
+import edu.umd.cs.findbugs.annotations.CheckForNull;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,16 +23,16 @@ public class MergebotScmFileSystem extends SCMFileSystem {
 
     private static final Logger LOGGER = Logger.getLogger(MergebotScmFileSystem.class.getName());
 
-    @Nonnull
+    @NonNull
     private final MergebotScm scm;
-    @Nonnull
+    @NonNull
     private final Item owner;
-    @Nonnull
+    @NonNull
     private final Launcher launcher;
 
     protected MergebotScmFileSystem(
-            @Nonnull Item owner,
-            @Nonnull MergebotScm scm,
+            @NonNull Item owner,
+            @NonNull MergebotScm scm,
             @CheckForNull SCMRevision rev) {
         super(rev);
         this.owner = owner;
@@ -45,23 +45,23 @@ public class MergebotScmFileSystem extends SCMFileSystem {
         return 0;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public SCMFile getRoot() {
         return new MergebotScmFile(this);
     }
 
-    @Nonnull
+    @NonNull
     public Item getOwner() {
         return owner;
     }
 
-    @Nonnull
+    @NonNull
     public MergebotScm getScm() {
         return scm;
     }
 
-    @Nonnull
+    @NonNull
     public Launcher getLauncher() {
         return launcher;
     }
@@ -70,8 +70,8 @@ public class MergebotScmFileSystem extends SCMFileSystem {
     public static class BuilderImpl extends SCMFileSystem.Builder {
         @Override
         public SCMFileSystem build(
-                @Nonnull Item owner,
-                @Nonnull SCM scm,
+                @NonNull Item owner,
+                @NonNull SCM scm,
                 @CheckForNull SCMRevision rev) {
             if (!isMergebotScm(scm)) {
                 return null;

@@ -1,5 +1,6 @@
 package com.codicesoftware.plugins.jenkins.tools;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.Extension;
 import hudson.FilePath;
 import hudson.Launcher;
@@ -13,7 +14,6 @@ import jenkins.model.Jenkins;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.export.Exported;
 
-import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
@@ -103,7 +103,7 @@ public class CmToolInstaller extends DownloadFromUrlInstaller {
 
         @Override
         public NodeSpecificInstallable forNode(
-                @Nonnull Node node, TaskListener log) throws IOException, InterruptedException {
+                @NonNull Node node, TaskListener log) throws IOException, InterruptedException {
             Platform platform = Platform.of(node);
             if (platform == Platform.OTHER) {
                 throw new InterruptedException("Unsupported platform");
@@ -124,7 +124,7 @@ public class CmToolInstaller extends DownloadFromUrlInstaller {
             // Avoid creating downloadables - we're not using the UpdateCenter
         }
 
-        @Nonnull
+        @NonNull
         @Override
         public String getDisplayName() {
             return "Download from plasticscm.com";

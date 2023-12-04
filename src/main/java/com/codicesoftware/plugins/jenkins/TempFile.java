@@ -1,6 +1,7 @@
 package com.codicesoftware.plugins.jenkins;
 
-import javax.annotation.Nonnull;
+import edu.umd.cs.findbugs.annotations.NonNull;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,7 +12,7 @@ public class TempFile {
     private TempFile() {
     }
 
-    @Nonnull
+    @NonNull
     public static Path create() throws IOException {
         return Files.createTempFile(UUID.randomUUID().toString(), ".tmp");
     }

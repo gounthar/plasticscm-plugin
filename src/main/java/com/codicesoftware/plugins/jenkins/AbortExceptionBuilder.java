@@ -1,9 +1,9 @@
 package com.codicesoftware.plugins.jenkins;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.AbortException;
 import hudson.model.TaskListener;
 
-import javax.annotation.Nonnull;
 import java.util.logging.Logger;
 
 public class AbortExceptionBuilder {
@@ -12,7 +12,7 @@ public class AbortExceptionBuilder {
     }
 
     public static AbortException build(
-            @Nonnull final Logger logger, @Nonnull final TaskListener listener, @Nonnull final Exception e) {
+            @NonNull final Logger logger, @NonNull final TaskListener listener, @NonNull final Exception e) {
         listener.fatalError(e.getMessage());
         logger.severe(e.getMessage());
         AbortException result = new AbortException(e.getMessage());

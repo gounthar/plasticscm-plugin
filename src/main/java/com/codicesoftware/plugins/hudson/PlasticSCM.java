@@ -20,6 +20,7 @@ import com.codicesoftware.plugins.jenkins.CredentialsFinder;
 import com.codicesoftware.plugins.jenkins.SelectorTemplates;
 import com.codicesoftware.plugins.jenkins.ObjectSpecType;
 import com.codicesoftware.plugins.jenkins.tools.CmTool;
+import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.AbortException;
 import hudson.EnvVars;
 import hudson.Extension;
@@ -56,9 +57,8 @@ import org.kohsuke.stapler.export.Exported;
 import org.kohsuke.stapler.export.ExportedBean;
 import org.kohsuke.stapler.interceptor.RequirePOST;
 
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import edu.umd.cs.findbugs.annotations.CheckForNull;
+import edu.umd.cs.findbugs.annotations.Nullable;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
@@ -209,7 +209,7 @@ public class PlasticSCM extends SCM {
      * {@inheritDoc}
      */
     @Override
-    @Nonnull
+    @NonNull
     public String getKey() {
         StringBuilder builder = new StringBuilder("Plastic SCM");
         for (WorkspaceInfo workspace : getAllWorkspaces()) {
@@ -238,10 +238,10 @@ public class PlasticSCM extends SCM {
      */
     @Override
     public void checkout(
-            @Nonnull final Run<?, ?> run,
-            @Nonnull final Launcher launcher,
-            @Nonnull final FilePath workspace,
-            @Nonnull final TaskListener listener,
+            @NonNull final Run<?, ?> run,
+            @NonNull final Launcher launcher,
+            @NonNull final FilePath workspace,
+            @NonNull final TaskListener listener,
             @CheckForNull final File changelogFile,
             @CheckForNull final SCMRevisionState baseline) throws IOException, InterruptedException {
 
@@ -304,7 +304,7 @@ public class PlasticSCM extends SCM {
      *
      */
     @Override
-    public void buildEnvVars(@Nonnull AbstractBuild<?, ?> build, @Nonnull Map<String, String> env) {
+    public void buildEnvVars(@NonNull AbstractBuild<?, ?> build, @NonNull Map<String, String> env) {
         super.buildEnvVars(build, env);
         buildEnvironment(build, env);
     }
@@ -314,7 +314,7 @@ public class PlasticSCM extends SCM {
      * {@inheritDoc}
      */
     @Override
-    public void buildEnvironment(@Nonnull Run<?, ?> build, @Nonnull Map<String, String> env) {
+    public void buildEnvironment(@NonNull Run<?, ?> build, @NonNull Map<String, String> env) {
         int index = 1;
         for (BuildData buildData : build.getActions(BuildData.class)) {
             ChangeSet cset = buildData.getChangeset();
@@ -335,10 +335,10 @@ public class PlasticSCM extends SCM {
      */
     @Override
     public SCMRevisionState calcRevisionsFromBuild(
-            @Nonnull final Run<?, ?> run,
+            @NonNull final Run<?, ?> run,
             @Nullable final FilePath wkPath,
             @Nullable final Launcher launcher,
-            @Nonnull final TaskListener listener) {
+            @NonNull final TaskListener listener) {
         return SCMRevisionState.NONE;
     }
 
@@ -347,11 +347,11 @@ public class PlasticSCM extends SCM {
      */
     @Override
     public PollingResult compareRemoteRevisionWith(
-            @Nonnull final Job<?, ?> project,
+            @NonNull final Job<?, ?> project,
             @Nullable final Launcher launcher,
             @Nullable final FilePath workspace,
-            @Nonnull final TaskListener listener,
-            @Nonnull final SCMRevisionState baseline) throws IOException, InterruptedException {
+            @NonNull final TaskListener listener,
+            @NonNull final SCMRevisionState baseline) throws IOException, InterruptedException {
         if (project.getLastBuild() == null) {
             listener.getLogger().println("No builds detected yet!");
             return BUILD_NOW;
@@ -387,7 +387,7 @@ public class PlasticSCM extends SCM {
         return (DescriptorImpl) super.getDescriptor();
     }
 
-    @Nonnull
+    @NonNull
     public ClientConfigurationArguments buildClientConfigurationArguments(
             @Nullable Item item, @CheckForNull String selector) {
         return new ClientConfigurationArguments(
@@ -507,11 +507,11 @@ public class PlasticSCM extends SCM {
     }
 
     private static List<ChangeSet> retrieveMultipleChangesetDetails(
-            @Nonnull final PlasticTool tool,
-            @Nonnull final FilePath workspacePath,
-            @Nonnull final TaskListener listener,
+            @NonNull final PlasticTool tool,
+            @NonNull final FilePath workspacePath,
+            @NonNull final TaskListener listener,
             @CheckForNull final ChangeSet fromCset,
-            @Nonnull final ChangeSet toCset) throws IOException, InterruptedException {
+            @NonNull final ChangeSet toCset) throws IOException, InterruptedException {
 
         if (fromCset == null) {
             return new ArrayList<ChangeSet>() {{ add(toCset); }};
@@ -548,8 +548,8 @@ public class PlasticSCM extends SCM {
             @Nullable Item item,
             @CheckForNull Launcher launcher,
             @CheckForNull FilePath workspacePath,
-            @Nonnull TaskListener listener,
-            @Nonnull Calendar lastCompletedBuildTimestamp,
+            @NonNull TaskListener listener,
+            @NonNull Calendar lastCompletedBuildTimestamp,
             @CheckForNull String selector) throws IOException, InterruptedException {
 
         // hasChanges() can be invoked on the master, without any workspace
@@ -655,8 +655,8 @@ public class PlasticSCM extends SCM {
     }
 
     private void populateEnvironmentVariables(
-            @Nonnull final ChangeSet cset,
-            @Nonnull final Map<String, String> environment,
+            @NonNull final ChangeSet cset,
+            @NonNull final Map<String, String> environment,
             @CheckForNull final String prefix) {
         environment.put(prefix + CHANGESET_ID, cset.getVersion());
         environment.put(prefix + CHANGESET_GUID, cset.getGuid());
@@ -675,7 +675,7 @@ public class PlasticSCM extends SCM {
         }
 
         @Override
-        @Nonnull
+        @NonNull
         public String getDisplayName() {
             return "Plastic SCM";
         }
@@ -782,7 +782,7 @@ public class PlasticSCM extends SCM {
             }
 
             @Override
-            @Nonnull
+            @NonNull
             public String getDisplayName() {
                 return "Plastic SCM Workspace";
             }

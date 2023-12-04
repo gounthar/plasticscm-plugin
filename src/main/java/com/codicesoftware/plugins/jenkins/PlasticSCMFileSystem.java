@@ -1,6 +1,7 @@
 package com.codicesoftware.plugins.jenkins;
 
 import com.codicesoftware.plugins.hudson.PlasticSCM;
+import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.Extension;
 import hudson.Launcher;
 import hudson.model.Item;
@@ -14,8 +15,7 @@ import jenkins.scm.api.SCMSource;
 import jenkins.scm.api.SCMSourceDescriptor;
 import jenkins.scm.impl.SingleSCMSource;
 
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
+import edu.umd.cs.findbugs.annotations.CheckForNull;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,31 +24,31 @@ public class PlasticSCMFileSystem extends SCMFileSystem {
 
     private static final Logger LOGGER = Logger.getLogger(PlasticSCMFileSystem.class.getName());
 
-    @Nonnull
+    @NonNull
     private final PlasticSCM scm;
-    @Nonnull
+    @NonNull
     private final Item owner;
-    @Nonnull
+    @NonNull
     private final Launcher launcher;
 
-    protected PlasticSCMFileSystem(@Nonnull Item owner, @Nonnull PlasticSCM scm, @CheckForNull SCMRevision rev) {
+    protected PlasticSCMFileSystem(@NonNull Item owner, @NonNull PlasticSCM scm, @CheckForNull SCMRevision rev) {
         super(rev);
         this.owner = owner;
         this.scm = scm;
         this.launcher = new Launcher.LocalLauncher(new LogTaskListener(LOGGER, Level.ALL));
     }
 
-    @Nonnull
+    @NonNull
     public Item getOwner() {
         return owner;
     }
 
-    @Nonnull
+    @NonNull
     public PlasticSCM getSCM() {
         return scm;
     }
 
-    @Nonnull
+    @NonNull
     public Launcher getLauncher() {
         return launcher;
     }
@@ -58,7 +58,7 @@ public class PlasticSCMFileSystem extends SCMFileSystem {
         return 0;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public SCMFile getRoot() {
         return new PlasticSCMFile(this);
@@ -72,8 +72,8 @@ public class PlasticSCMFileSystem extends SCMFileSystem {
         }
 
         @Override
-        public SCMFileSystem build(@Nonnull Item owner,
-                @Nonnull SCM scm,
+        public SCMFileSystem build(@NonNull Item owner,
+                @NonNull SCM scm,
                 @CheckForNull SCMRevision rev) {
             if (scm == null) {
                 return null;

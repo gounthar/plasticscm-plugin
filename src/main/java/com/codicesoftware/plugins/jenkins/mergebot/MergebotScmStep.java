@@ -3,6 +3,7 @@ package com.codicesoftware.plugins.jenkins.mergebot;
 import com.codicesoftware.plugins.hudson.model.CleanupMethod;
 import com.codicesoftware.plugins.hudson.model.WorkingMode;
 import com.codicesoftware.plugins.hudson.util.FormFiller;
+import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.Extension;
 import hudson.Util;
 import hudson.model.Item;
@@ -15,8 +16,6 @@ import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.DataBoundSetter;
 import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.interceptor.RequirePOST;
-
-import javax.annotation.Nonnull;
 
 public class MergebotScmStep extends SCMStep {
 
@@ -65,7 +64,7 @@ public class MergebotScmStep extends SCMStep {
         this.specAttributeName = specAttributeName;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     protected SCM createSCM() {
         return new MergebotScm(cleanup, workingMode, credentialsId, specAttributeName);
@@ -74,13 +73,13 @@ public class MergebotScmStep extends SCMStep {
     @Extension
     public static final class MergebotScmStepDescriptor extends SCMStep.SCMStepDescriptor {
         @Override
-        @Nonnull
+        @NonNull
         public String getFunctionName() {
             return "mergebotCheckout";
         }
 
         @Override
-        @Nonnull
+        @NonNull
         public String getDisplayName() {
             return "Plastic SCM Mergebot Checkout";
         }

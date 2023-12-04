@@ -3,8 +3,8 @@ package com.codicesoftware.plugins.hudson.commands;
 import com.codicesoftware.plugins.hudson.model.ChangeSet;
 import com.codicesoftware.plugins.hudson.model.ObjectSpec;
 import com.codicesoftware.plugins.hudson.util.MaskedArgumentListBuilder;
+import edu.umd.cs.findbugs.annotations.NonNull;
 
-import javax.annotation.Nonnull;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -23,14 +23,14 @@ public class DiffCommand implements ParseableCommand<List<ChangeSet.Item>> {
             String.format("^%1$s(.*)%2$s([0-9]+)%2$s(-?[0-9]+)%2$s([ACDM])%3$s$", startOfLine, separator, endOfLine),
             Pattern.UNICODE_CHARACTER_CLASS);
 
-    @Nonnull
+    @NonNull
     private final ObjectSpec objectSpec;
 
-    public DiffCommand(@Nonnull final ObjectSpec objectSpec) {
+    public DiffCommand(@NonNull final ObjectSpec objectSpec) {
         this.objectSpec = objectSpec;
     }
 
-    @Nonnull
+    @NonNull
     public MaskedArgumentListBuilder getArguments() {
         MaskedArgumentListBuilder arguments = new MaskedArgumentListBuilder();
 
@@ -44,8 +44,8 @@ public class DiffCommand implements ParseableCommand<List<ChangeSet.Item>> {
     }
 
     @Override
-    @Nonnull
-    public List<ChangeSet.Item> parse(@Nonnull final Reader r) throws ParseException, IOException {
+    @NonNull
+    public List<ChangeSet.Item> parse(@NonNull final Reader r) throws ParseException, IOException {
         ArrayList<ChangeSet.Item> result = new ArrayList<>();
 
         BufferedReader reader = new BufferedReader(r);
@@ -62,8 +62,8 @@ public class DiffCommand implements ParseableCommand<List<ChangeSet.Item>> {
         return result;
     }
 
-    @Nonnull
-    private static String convertStatus(@Nonnull final String lineStatus) {
+    @NonNull
+    private static String convertStatus(@NonNull final String lineStatus) {
         switch (lineStatus) {
             case "A":
                 return "added";
